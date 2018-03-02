@@ -106,3 +106,4 @@ project/plugins/project/
 
 # End of https://www.gitignore.io/api/sbt
 .idea/
+slides/
