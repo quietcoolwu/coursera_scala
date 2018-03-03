@@ -11,32 +11,29 @@ class Rational(x: Int, y: Int) {
   def this(x: Int) = this(x, 1)
 
 
-  def <(that: Rational) = {
-    (this.denom * that.denom) * (this.numer * that.denom - this.denom * that.numer) < 0
-  }
+  def <(that: Rational) =
+    (denom * that.denom) * (numer * that.denom - denom * that.numer) < 0
 
-  def max(that: Rational) =
-    if (this < that) that else this
 
   def min(that: Rational) =
-    if (!(this < that)) that else this
+    if (this < that) this else that
 
   //  prefix operator
   def unary_- : Rational = new Rational(-numer, denom)
 
 
-  def +(r: Rational) =
-    new Rational(numer * r.denom + r.numer * denom,
-      denom * r.denom)
+  def +(that: Rational) =
+    new Rational(numer * that.denom + that.numer * denom,
+      denom * that.denom)
 
-  def -(r: Rational) = this + -r
+  def -(that: Rational) = this + (-that)
 
 
-  def *(r: Rational) =
-    new Rational(numer * r.numer,
-      denom * r.denom)
+  def *(that: Rational) =
+    new Rational(numer * that.numer,
+      denom * that.denom)
 
-  def /(r: Rational) = this * new Rational(r.denom, r.numer)
+  def /(that: Rational) = this * new Rational(that.denom, that.numer)
 
   override def toString = numer + "/" + denom
 }
@@ -52,7 +49,7 @@ x < -x
 
 -x < x
 
-x - y - z
+-x - y - z
 
 x + y + z
 
@@ -64,6 +61,4 @@ new Rational(1) / x
 
 
 x < y
-x max y
-y max z
 x min z

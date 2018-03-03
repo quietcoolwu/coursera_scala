@@ -110,5 +110,51 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("intersect") {
+    new TestSets {
+      val i = intersect(s2, union(s1, s2))
+      printSet(i)
+      assert(contains(i, 2) && !contains(i, 1))
+    }
+  }
+
+  test("diff") {
+    new TestSets {
+      val i = diff(union(s1, s2), s1)
+      assert(contains(i, 2) && !contains(i, 1))
+    }
+  }
+
+  test("filter") {
+    new TestSets {
+      val i = filter(union(s1, s2), x => x < 2)
+      printSet(i)
+      assert(contains(i, 1) && !contains(i, 2))
+    }
+  }
+
+  test("forall") {
+    new TestSets {
+      val i = union(union(s1, s2), s3)
+      printSet(i)
+      assert(forall(i, x => x <= 3) && !forall(i, x => x >= 4))
+    }
+  }
+
+  test("exists") {
+    new TestSets {
+      val i = union(union(s1, s2), s3)
+      printSet(i)
+      assert(exists(i, x => x == 3) && !exists(i, x => x >= 4))
+    }
+  }
+
+  test("map") {
+    new TestSets {
+      val i = map(union(union(s1, s2), s3), x => x * x)
+      printSet(i)
+      assert(contains(i, 1) && contains(i, 4) && contains(i, 9))
+    }
+  }
 
 }
